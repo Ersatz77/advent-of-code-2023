@@ -1,1 +1,1 @@
-I thought about using TypeScript this year, but C++ was a better choice.
+I thought about using TypeScript this year, but C++ was still a better choice.
