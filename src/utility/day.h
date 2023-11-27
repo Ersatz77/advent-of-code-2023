@@ -22,7 +22,7 @@ namespace aoc
     {
     public:
         Day() = default;
-        ~Day() = default;
+        virtual ~Day() = default;
 
         virtual std::string part_1(const std::filesystem::path& path) const = 0;
         virtual std::string part_2(const std::filesystem::path& path) const = 0;
