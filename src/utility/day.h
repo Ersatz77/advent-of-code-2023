@@ -24,10 +24,10 @@ namespace aoc
         Day() = default;
         virtual ~Day() = default;
 
-        virtual std::string part_1(const std::filesystem::path& path) const = 0;
-        virtual std::string part_2(const std::filesystem::path& path) const = 0;
+        virtual std::string part_1(const std::filesystem::path& input_root) const = 0;
+        virtual std::string part_2(const std::filesystem::path& input_root) const = 0;
 
-        DayResults run(const std::filesystem::path& path) const;
+        DayResults run(const std::filesystem::path& input_root) const;
     };
 
 } // aoc
