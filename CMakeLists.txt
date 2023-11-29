@@ -10,6 +10,8 @@ include(cmake/ban_in_source_builds.cmake)
 # ------------------------------------------------------------------------------
 # Create target for specifying the C++ standard and compiler specific options
 # ------------------------------------------------------------------------------
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 add_library(project_options INTERFACE)
 target_compile_features(project_options
     INTERFACE
@@ -45,6 +47,7 @@ include(FetchContent)
 FetchContent_Declare(fmt
     GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
     GIT_TAG        "10.1.1"
+    SYSTEM
 )
 
 message(STATUS "Populating dependencies...")
