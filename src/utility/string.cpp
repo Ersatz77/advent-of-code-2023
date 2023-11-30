@@ -9,12 +9,15 @@
 
 namespace aoc
 {
-    std::vector<std::string>split(const std::string& str, const char delim)
+    std::vector<std::string> split(const std::string& str, const char delim)
     {
-        return str
-            | std::views::split(delim)
-            | std::views::transform([](auto&& s) { return std::string(s.begin(), s.end()); })
-            | std::ranges::to<std::vector>();
+        std::vector<std::string> split_results;
+        for (const auto& s : str | std::views::split(delim))
+        {
+            split_results.emplace_back(s.begin(), s.end());
+        }
+
+        return split_results;
     }
 
     std::vector<std::string> regex_split(const std::string& str, const std::string& pattern)

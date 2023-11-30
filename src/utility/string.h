@@ -7,7 +7,7 @@
 namespace aoc
 {
     // Split a string using a single delimiter
-    std::vector<std::string>split(const std::string& str, const char delim = ' ');
+    std::vector<std::string> split(const std::string& str, const char delim = ' ');
 
     // Split a string using regex
     std::vector<std::string> regex_split(const std::string& str, const std::string& pattern);
