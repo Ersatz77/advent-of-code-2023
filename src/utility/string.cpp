@@ -13,7 +13,7 @@ namespace aoc
     {
         return str
             | std::views::split(delim)
-            | std::views::transform([](auto& s) { return std::string(s.begin(), s.end()); })
+            | std::views::transform([](auto&& s) { return std::string(s.begin(), s.end()); })
             | std::ranges::to<std::vector>();
     }
 
