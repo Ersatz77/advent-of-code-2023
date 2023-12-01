@@ -4,6 +4,7 @@
 
 #include "fmt/format.h"
 
+#include <array>
 #include <cctype>
 #include <cstdint>
 #include <filesystem>
@@ -27,48 +28,38 @@ namespace aoc
         return lines;
     }
 
-    static int digit_at(const std::string& line, const size_t idx)
+    static int digit_at(const std::string& line, const size_t start_idx)
     {
-        // If `idx` is a number, immediately return it
-        if (isdigit(line[idx]))
-            return line[idx] - '0';
+        // If `start_idx` is at a number, immediately return it
+        if (isdigit(line[start_idx]))
+        {
+            return line[start_idx] - '0';
+        }
 
-        // Otherwise, check if a word can be read
-        if ((idx + 2) < line.length() && line.substr(idx, 3) == "one")
+        // Otherwise, try to read a word
+        constexpr std::array<std::string_view, 10> digit_words = {
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+        };
+
+        for (size_t digit = 1; digit < 10; ++digit)
         {
-            return 1;
-        }
-        else if ((idx + 2) < line.length() && line.substr(idx, 3) == "two")
-        {
-            return 2;
-        }
-        else if ((idx + 4) < line.length() && line.substr(idx, 5) == "three")
-        {
-            return 3;
-        }
-        else if ((idx + 3) < line.length() && line.substr(idx, 4) == "four")
-        {
-            return 4;
-        }
-        else if ((idx + 3) < line.length() && line.substr(idx, 4) == "five")
-        {
-            return 5;
-        }
-        else if ((idx + 2) < line.length() && line.substr(idx, 3) == "six")
-        {
-            return 6;
-        }
-        else if ((idx + 4) < line.length() && line.substr(idx, 5) == "seven")
-        {
-            return 7;
-        }
-        else if ((idx + 4) < line.length() && line.substr(idx, 5) == "eight")
-        {
-            return 8;
-        }
-        else if ((idx + 3) < line.length() && line.substr(idx, 4) == "nine")
-        {
-            return 9;
+            size_t i = start_idx;
+            size_t j = 0;
+            while (i < line.length() && j < digit_words[digit].length())
+            {
+                if (line[i] != digit_words[digit][j])
+                {
+                    break;
+                }
+
+                ++i;
+                ++j;
+            }
+
+            if (j == digit_words[digit].length())
+            {
+                return static_cast<int>(digit);
+            }
         }
 
         return std::numeric_limits<int>::min();
