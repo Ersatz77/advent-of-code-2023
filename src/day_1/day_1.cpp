@@ -40,7 +40,6 @@ namespace aoc
         constexpr std::array<std::string_view, 10> digit_words = {
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
         };
-
         for (size_t digit = 1; digit < 10; ++digit)
         {
             size_t i = start_idx;
