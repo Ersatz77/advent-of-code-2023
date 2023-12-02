@@ -30,7 +30,7 @@ namespace aoc
     struct CubeGame
     {
         int id;
-        std::vector<std::vector<CubeStats>> rounds;
+        std::vector<CubeStats> shown_cubes;
     };
 
     static std::vector<CubeGame> parse_input(const std::filesystem::path& path)
@@ -44,12 +44,11 @@ namespace aoc
             std::vector<std::string> raw_game = split(line, ':');
             int id = std::stoi(raw_game.front().substr(5));
 
-            // Split the rounds string at the `;` to get each round
-            std::vector<std::vector<CubeStats>> rounds;
+            // Split string at the `;` to get each round
+            std::vector<CubeStats> cubes;
             for (const std::string& raw_round : split(raw_game.back(), ';'))
             {
                 // Split the round at the `,` to get each cube
-                std::vector<CubeStats> cubes;
                 for (const std::string& raw_cube : split(raw_round, ','))
                 {
                     int count = std::stoi(raw_cube.substr(0, 3));
@@ -66,11 +65,9 @@ namespace aoc
                         cubes.emplace_back(CubeColor::BLUE, count);
                     }
                 }
-
-                rounds.push_back(cubes);
             }
 
-            games.emplace_back(id, rounds);
+            games.emplace_back(id, cubes);
         }
 
         return games;
@@ -78,17 +75,14 @@ namespace aoc
 
     static bool is_possible(const CubeGame& game, const int total_red, const int total_green, const int total_blue)
     {
-        for (const auto& round : game.rounds)
+        for (const auto& cube : game.shown_cubes)
         {
-            for (const auto& cube : round)
+            bool has_valid_count = (cube.color == CubeColor::RED && cube.count <= total_red)
+                || (cube.color == CubeColor::GREEN && cube.count <= total_green)
+                || (cube.color == CubeColor::BLUE && cube.count <= total_blue);
+            if (!has_valid_count)
             {
-                bool has_valid_count = (cube.color == CubeColor::RED && cube.count <= total_red)
-                    || (cube.color == CubeColor::GREEN && cube.count <= total_green)
-                    || (cube.color == CubeColor::BLUE && cube.count <= total_blue);
-                if (!has_valid_count)
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -100,24 +94,21 @@ namespace aoc
         int max_red = std::numeric_limits<int>::min();
         int max_green = std::numeric_limits<int>::min();
         int max_blue = std::numeric_limits<int>::min();
-        for (const auto& round : game.rounds)
+        for (const auto& cube : game.shown_cubes)
         {
-            for (const auto& cube : round)
+            switch (cube.color)
             {
-                switch (cube.color)
-                {
-                    case CubeColor::RED:
-                        max_red = std::max(cube.count, max_red);
-                        break;
-                    case CubeColor::GREEN:
-                        max_green = std::max(cube.count, max_green);
-                        break;
-                    case CubeColor::BLUE:
-                        max_blue = std::max(cube.count, max_blue);
-                        break;
-                    default:
-                        break;
-                }
+                case CubeColor::RED:
+                    max_red = std::max(cube.count, max_red);
+                    break;
+                case CubeColor::GREEN:
+                    max_green = std::max(cube.count, max_green);
+                    break;
+                case CubeColor::BLUE:
+                    max_blue = std::max(cube.count, max_blue);
+                    break;
+                default:
+                    break;
             }
         }
 
