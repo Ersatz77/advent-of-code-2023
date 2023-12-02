@@ -1,5 +1,6 @@
 #include "day_1/day_1.h"
 #include "day_2/day_2.h"
+#include "day_3/day_3.h"
 #include "utility/day.h"
 
 #include "fmt/format.h"
@@ -28,6 +29,7 @@ int main(int argc, char* argv[])
 
     solutions.push_back(std::make_unique<aoc::Day1>());
     solutions.push_back(std::make_unique<aoc::Day2>());
+    solutions.push_back(std::make_unique<aoc::Day3>());
 
     try
     {
