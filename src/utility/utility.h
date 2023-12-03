@@ -56,7 +56,7 @@ namespace std
     template<>
     struct hash<pair<char, char>>
     {
-        size_t operator()(const pair<char, char>& p)
+        size_t operator()(const pair<char, char>& p) const
         {
             size_t seed = 0;
             aoc::hash_combine(seed, p.first);
@@ -68,7 +68,7 @@ namespace std
     template<>
     struct hash<pair<string, string>>
     {
-        size_t operator()(const pair<string, string>& p)
+        size_t operator()(const pair<string, string>& p) const
         {
             size_t seed = 0;
             aoc::hash_combine(seed, p.first);
@@ -80,7 +80,7 @@ namespace std
     template<>
     struct hash<pair<int, int>>
     {
-        size_t operator()(const pair<int, int>& p)
+        size_t operator()(const pair<int, int>& p) const
         {
             size_t seed = 0;
             aoc::hash_combine(seed, p.first);
