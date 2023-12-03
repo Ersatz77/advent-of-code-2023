@@ -91,28 +91,28 @@ namespace aoc
 
     static int cube_power(const CubeGame& game)
     {
-        int max_red = std::numeric_limits<int>::min();
-        int max_green = std::numeric_limits<int>::min();
-        int max_blue = std::numeric_limits<int>::min();
+        int min_red = std::numeric_limits<int>::min();
+        int min_green = std::numeric_limits<int>::min();
+        int min_blue = std::numeric_limits<int>::min();
         for (const auto& cube : game.shown_cubes)
         {
             switch (cube.color)
             {
                 case CubeColor::RED:
-                    max_red = std::max(cube.count, max_red);
+                    min_red = std::max(cube.count, min_red);
                     break;
                 case CubeColor::GREEN:
-                    max_green = std::max(cube.count, max_green);
+                    min_green = std::max(cube.count, min_green);
                     break;
                 case CubeColor::BLUE:
-                    max_blue = std::max(cube.count, max_blue);
+                    min_blue = std::max(cube.count, min_blue);
                     break;
                 default:
                     break;
             }
         }
 
-        return max_red * max_green * max_blue;
+        return min_red * min_green * min_blue;
     }
  
     std::string Day2::part_1(const std::filesystem::path& input_root) const
