@@ -79,7 +79,7 @@ namespace aoc
         return { part_numbers, symbols };
     }
 
-    static std::unordered_set<SchematicNumber> nearby_parts(const SchematicSymbol symbol, const std::unordered_map<Point, SchematicNumber>& part_numbers)
+    static std::unordered_set<SchematicNumber> nearby_parts(const SchematicSymbol& symbol, const std::unordered_map<Point, SchematicNumber>& part_numbers)
     {
         std::unordered_set<SchematicNumber> nearby;
         for (const auto& adj : symbol.pos.adjacent())
