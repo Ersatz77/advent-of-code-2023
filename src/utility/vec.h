@@ -266,6 +266,22 @@ namespace aoc
     using Point = Vec2<double>;
     using Point3D = Vec3<double>;
 
+    // --------------------------------------------------------------------------------
+    // Utility functions
+    // --------------------------------------------------------------------------------
+
+    template<Number T>
+    Point make_point(const T x, const T y)
+    {
+        return Point(static_cast<double>(x), static_cast<double>(y));
+    }
+
+    template<Number T>
+    Point3D make_point_3d(const T x, const T y, const T z)
+    {
+        return Point3D(static_cast<double>(x), static_cast<double>(y) ,static_cast<double>(z));
+    }
+
 } // aoc
 
 namespace std
@@ -273,7 +289,7 @@ namespace std
     template<aoc::Number T>
     struct hash<aoc::Vec2<T>>
     {
-        size_t operator()(const aoc::Vec2<T>& vec)
+        size_t operator()(const aoc::Vec2<T>& vec) const
         {
             size_t seed = 0;
             aoc::hash_combine(seed, vec.x);
@@ -285,7 +301,7 @@ namespace std
     template<aoc::Number T>
     struct hash<aoc::Vec3<T>>
     {
-        size_t operator()(const aoc::Vec3<T>& vec)
+        size_t operator()(const aoc::Vec3<T>& vec) const
         {
             size_t seed = 0;
             aoc::hash_combine(seed, vec.x);
