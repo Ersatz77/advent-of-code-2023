@@ -6,6 +6,7 @@
 #include "fmt/format.h"
 
 #include <cctype>
+#include <cstdint>
 #include <filesystem>
 #include <fstream>
 #include <memory>
@@ -14,7 +15,6 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
-
 
 namespace aoc
 {
@@ -130,7 +130,7 @@ namespace aoc
 
     std::string Day3::part_1(const std::filesystem::path& input_root) const
     {
-        const EngineSchematic schematic = parse_input(input_root / "day_3.txt");
+        EngineSchematic schematic = parse_input(input_root / "day_3.txt");
 
         int part_sum = 0;
         for (const auto& symbol : schematic.symbols)
@@ -146,7 +146,7 @@ namespace aoc
 
     std::string Day3::part_2(const std::filesystem::path& input_root) const
     {
-        const EngineSchematic schematic = parse_input(input_root / "day_3.txt");
+        EngineSchematic schematic = parse_input(input_root / "day_3.txt");
 
         int gear_sum = 0;
         for (const auto& symbol : schematic.symbols)
