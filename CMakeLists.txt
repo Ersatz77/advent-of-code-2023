@@ -55,7 +55,7 @@ FetchContent_MakeAvailable(fmt)
 # ------------------------------------------------------------------------------
 # Create executable
 # ------------------------------------------------------------------------------
-add_executable(aoc_2023_app "src/main.cpp" "src/utility/utility.h" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/day_1/day_1.h" "src/day_1/day_1.cpp" "src/day_2/day_2.h" "src/day_2/day_2.cpp" "src/day_3/day_3.h" "src/day_3/day_3.cpp" "src/day_3/schematic.h" "src/day_3/schematic.cpp" "src/day_4/day_4.h" "src/day_4/day_4.cpp")
+add_executable(aoc_2023_app "src/main.cpp" "src/utility/utility.h" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/day_1/day_1.h" "src/day_1/day_1.cpp" "src/day_2/day_2.h" "src/day_2/day_2.cpp" "src/day_3/day_3.h" "src/day_3/day_3.cpp" "src/day_4/day_4.h" "src/day_4/day_4.cpp")
 
 target_include_directories(aoc_2023_app
     PRIVATE

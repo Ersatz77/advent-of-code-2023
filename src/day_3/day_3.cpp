@@ -1,6 +1,5 @@
 #include "day_3/day_3.h"
 
-#include "day_3/schematic.h"
 #include "utility/io.h"
 #include "utility/vec.h"
 
@@ -9,16 +8,28 @@
 #include <cctype>
 #include <filesystem>
 #include <fstream>
-#include <numeric>
-#include <ranges>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
+
 namespace aoc
 {
+    struct SchematicSymbol
+    {
+        char glyph;
+        Point pos;
+    };
+
+    struct EngineSchematic
+    {
+        std::unordered_map<Point, std::shared_ptr<int>> part_numbers;
+        std::vector<SchematicSymbol> symbols;
+    };
+
     static bool is_symbol(const char c)
     {
         return !(std::isdigit(c) || c == '.');
@@ -38,11 +49,11 @@ namespace aoc
         return { value, length };
     }
 
-    static std::pair<std::unordered_map<Point, SchematicNumber>, std::vector<SchematicSymbol>> parse_input(const std::filesystem::path& path)
+    static EngineSchematic parse_input(const std::filesystem::path& path)
     {
         std::ifstream file = open_file(path);
 
-        std::unordered_map<Point, SchematicNumber> part_numbers;
+        std::unordered_map<Point, std::shared_ptr<int>> part_numbers;
         std::vector<SchematicSymbol> symbols;
 
         size_t y = 0;
@@ -54,7 +65,8 @@ namespace aoc
                 if (std::isdigit(current))
                 {
                     const auto [value, length] = read_number(line, x);
-                    SchematicNumber number(value);
+
+                    std::shared_ptr<int> number = std::make_shared<int>(value);
                     for (size_t dx = x; dx < (x + length); ++dx)
                     {
                         part_numbers[make_point(dx, y)] = number;
@@ -79,13 +91,13 @@ namespace aoc
         return { part_numbers, symbols };
     }
 
-    static std::unordered_set<SchematicNumber> nearby_parts(const SchematicSymbol& symbol, const std::unordered_map<Point, SchematicNumber>& part_numbers)
+    static std::unordered_set<std::shared_ptr<int>> nearby_parts(const SchematicSymbol& symbol, const EngineSchematic& schematic)
     {
-        std::unordered_set<SchematicNumber> nearby;
+        std::unordered_set<std::shared_ptr<int>> nearby;
         for (const auto& adj : symbol.pos.adjacent())
         {
-            const auto it = part_numbers.find(adj);
-            if (it != part_numbers.end())
+            const auto it = schematic.part_numbers.find(adj);
+            if (it != schematic.part_numbers.end())
             {
                 nearby.insert(it->second);
             }
@@ -94,15 +106,39 @@ namespace aoc
         return nearby;
     }
 
+    static int gear_ratio(const SchematicSymbol& symbol, const EngineSchematic& schematic)
+    {
+        if (symbol.glyph != '*')
+        {
+            return 0;
+        }
+
+        const auto nearby = nearby_parts(symbol, schematic);
+        if (nearby.size() != 2)
+        {
+            return 0;
+        }
+
+        int ratio = 1;
+        for (const auto& part_number : nearby)
+        {
+            ratio *= *part_number;
+        }
+
+        return ratio;
+    }
+
     std::string Day3::part_1(const std::filesystem::path& input_root) const
     {
-        const auto [part_numbers, symbols] = parse_input(input_root / "day_3.txt");
+        const EngineSchematic schematic = parse_input(input_root / "day_3.txt");
 
         int part_sum = 0;
-        for (const auto& symbol : symbols)
+        for (const auto& symbol : schematic.symbols)
         {
-            const auto nearby = nearby_parts(symbol, part_numbers);
-            part_sum += std::reduce(nearby.begin(), nearby.end(), 0, [](const int acc, const auto& p) { return acc + p.value; });
+            for (const auto& part_number : nearby_parts(symbol, schematic))
+            {
+                part_sum += *part_number;
+            }
         }
 
         return fmt::format("Day 3 Part 1 | Sum of valid part numbers: {}", part_sum);
@@ -110,18 +146,12 @@ namespace aoc
 
     std::string Day3::part_2(const std::filesystem::path& input_root) const
     {
-        const auto [part_numbers, symbols] = parse_input(input_root / "day_3.txt");
+        const EngineSchematic schematic = parse_input(input_root / "day_3.txt");
 
         int gear_sum = 0;
-        for (const auto& symbol : std::ranges::filter_view(symbols, [](const auto& s) { return s.glyph == '*'; }))
+        for (const auto& symbol : schematic.symbols)
         {
-            const auto nearby = nearby_parts(symbol, part_numbers);
-            if (nearby.size() != 2)
-            {
-                continue;
-            }
-
-            gear_sum += std::reduce(nearby.begin(), nearby.end(), 1, [](const int acc, const auto& p) { return acc * p.value; });
+            gear_sum += gear_ratio(symbol, schematic);
         }
 
         return fmt::format("Day 3 Part 2 | Sum of all gear ratios: {}", gear_sum);
