@@ -81,7 +81,7 @@ namespace aoc
 
     std::pair<float, float> quadratic(const float a, const float b, const float c)
     {
-        float determinant = (b * b) - (4.0 * a * c);
+        float determinant = (b * b) - (4.0f * a * c);
         float root_1 = (-b + std::sqrtf(determinant)) / (2 * a);
         float root_2 = (-b - std::sqrtf(determinant)) / (2 * a);
 
