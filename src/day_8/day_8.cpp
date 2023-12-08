@@ -140,6 +140,7 @@ namespace aoc
             ++steps;
             currents = next_currents;
         }
+        
         return ghost_steps;
     }
 
