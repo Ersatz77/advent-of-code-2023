@@ -4,6 +4,8 @@
 
 #include <filesystem>
 #include <fstream>
+#include <iostream>
+#include <limits>
 #include <stdexcept>
 
 namespace aoc
@@ -17,6 +19,11 @@ namespace aoc
         }
 
         return file;
+    }
+
+    void skip_line(std::istream& stream)
+    {
+        stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
 } // aoc
