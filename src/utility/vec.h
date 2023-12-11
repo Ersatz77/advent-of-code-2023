@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <utility>
 
 namespace aoc
 {
@@ -307,6 +308,36 @@ namespace std
             aoc::hash_combine(seed, vec.x);
             aoc::hash_combine(seed, vec.y);
             aoc::hash_combine(seed, vec.z);
+            return seed;
+        }
+    };
+
+    template<aoc::Number T>
+    struct hash<pair<aoc::Vec2<T>, aoc::Vec2<T>>>
+    {
+        size_t operator()(const pair<aoc::Vec2<T>, aoc::Vec2<T>>& p) const
+        {
+            size_t seed = 0;
+            aoc::hash_combine(seed, p.first.x);
+            aoc::hash_combine(seed, p.first.y);
+            aoc::hash_combine(seed, p.second.x);
+            aoc::hash_combine(seed, p.second.y);
+            return seed;
+        }
+    };
+
+    template<aoc::Number T>
+    struct hash<pair<aoc::Vec3<T>, aoc::Vec3<T>>>
+    {
+        size_t operator()(const pair<aoc::Vec3<T>, aoc::Vec3<T>>& p) const
+        {
+            size_t seed = 0;
+            aoc::hash_combine(seed, p.first.x);
+            aoc::hash_combine(seed, p.first.y);
+            aoc::hash_combine(seed, p.first.z);
+            aoc::hash_combine(seed, p.second.x);
+            aoc::hash_combine(seed, p.second.y);
+            aoc::hash_combine(seed, p.second.z);
             return seed;
         }
     };
