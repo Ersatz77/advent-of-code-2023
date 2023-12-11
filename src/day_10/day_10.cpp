@@ -6,6 +6,7 @@
 #include "fmt/format.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
@@ -193,8 +194,7 @@ namespace aoc
             }
         }
 
-        furthest = static_cast<int>(std::ceil(furthest / 2.0));
-        return { shape, furthest };
+        return { shape, (furthest / 2) + 1};
     }
 
     static int loop_area(const std::vector<Point>& loop)
