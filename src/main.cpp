@@ -9,6 +9,7 @@
 #include "day_9/day_9.h"
 #include "day_10/day_10.h"
 #include "day_11/day_11.h"
+#include "day_12/day_12.h"
 #include "utility/day.h"
 
 #include "fmt/format.h"
@@ -46,6 +47,7 @@ int main(int argc, char* argv[])
     solutions.push_back(std::make_unique<aoc::Day9>());
     solutions.push_back(std::make_unique<aoc::Day10>());
     solutions.push_back(std::make_unique<aoc::Day11>());
+    solutions.push_back(std::make_unique<aoc::Day12>());
 
     try
     {
