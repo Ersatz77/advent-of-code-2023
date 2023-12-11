@@ -215,7 +215,7 @@ namespace aoc
     {
         PipeField field = parse_input(input_root / "day_10.txt");
         
-        auto [loop, furthest] = walk_loop(field);
+        auto [_, furthest] = walk_loop(field);
 
         return fmt::format("Day 10 Part 1 | Furthest position in the loop: {}", furthest);
     }
