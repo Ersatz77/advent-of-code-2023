@@ -7,6 +7,7 @@
 #include <string>
 #include <type_traits>
 #include <utility>
+#include <tuple>
 #include <vector>
 
 namespace aoc
@@ -85,6 +86,19 @@ namespace std
             size_t seed = 0;
             aoc::hash_combine(seed, p.first);
             aoc::hash_combine(seed, p.second);
+            return seed;
+        }
+    };
+
+    template<>
+    struct hash<tuple<size_t, int64_t, size_t>>
+    {
+        size_t operator()(const tuple<size_t, int64_t, size_t>& t) const
+        {
+            size_t seed = 0;
+            aoc::hash_combine(seed, std::get<0>(t));
+            aoc::hash_combine(seed, std::get<1>(t));
+            aoc::hash_combine(seed, std::get<2>(t));
             return seed;
         }
     };
