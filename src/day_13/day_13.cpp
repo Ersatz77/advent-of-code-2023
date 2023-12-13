@@ -72,7 +72,7 @@ namespace aoc
 
         for (size_t i = 1; i < rows.size(); ++i)
         {
-            // Create ranges that go in opposite direction from a potential reflection line
+            // Create ranges that go in opposite directions from a potential reflection line
             auto going_left = std::ranges::subrange(rows.begin(), rows.begin() + i) | std::views::reverse;
             auto going_right = std::ranges::subrange(rows.begin() + i, rows.end());
 
