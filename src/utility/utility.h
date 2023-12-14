@@ -9,6 +9,7 @@
 #include <utility>
 #include <tuple>
 #include <vector>
+#include <unordered_set>
 
 namespace aoc
 {
@@ -99,6 +100,36 @@ namespace std
             aoc::hash_combine(seed, std::get<0>(t));
             aoc::hash_combine(seed, std::get<1>(t));
             aoc::hash_combine(seed, std::get<2>(t));
+            return seed;
+        }
+    };
+
+    template<typename T>
+    struct hash<vector<T>>
+    {
+        size_t operator()(const vector<T>& v) const
+        {
+            size_t seed = 0;
+            for (const T& i : v)
+            {
+                aoc::hash_combine(seed, i);
+            }
+
+            return seed;
+        }
+    };
+
+    template<typename T>
+    struct hash<unordered_set<T>>
+    {
+        size_t operator()(const unordered_set<T>& s) const
+        {
+            size_t seed = 0;
+            for (const T& v : s)
+            {
+                aoc::hash_combine(seed, v);
+            }
+
             return seed;
         }
     };
