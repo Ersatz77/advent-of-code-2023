@@ -32,7 +32,7 @@ namespace aoc
         void add(const std::string& key, const int64_t value);
         void remove(const std::string& key);
 
-        int64_t size() const;
+        size_t size() const;
         int64_t focusing_power() const;
 
         static size_t hasher(const std::string& key);

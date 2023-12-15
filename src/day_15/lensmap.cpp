@@ -32,7 +32,7 @@ namespace aoc
         box.remove_if([&key](const Lens& lens) { return lens.first == key; });
     }
 
-    int64_t LensMap::size() const
+    size_t LensMap::size() const
     {
         size_t total_size = 0;
         for (const std::list<Lens> box : m_boxes)
@@ -66,10 +66,10 @@ namespace aoc
 
     size_t LensMap::hasher(const std::string& key)
     {
-        int64_t hash = 0;
+        size_t hash = 0;
         for (const char c : key)
         {
-            hash += static_cast<int64_t>(c);
+            hash += static_cast<size_t>(c);
             hash *= 17;
             hash %= 256;
         }
