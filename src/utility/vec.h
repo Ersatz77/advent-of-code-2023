@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <tuple>
 #include <utility>
 
 namespace aoc
@@ -338,6 +339,33 @@ namespace std
             aoc::hash_combine(seed, p.second.x);
             aoc::hash_combine(seed, p.second.y);
             aoc::hash_combine(seed, p.second.z);
+            return seed;
+        }
+    };
+
+    template<aoc::Number T>
+    struct hash<tuple<aoc::Vec2<T>, aoc::Vec2<T>, int, int64_t>>
+    {
+        size_t operator()(const tuple<aoc::Vec2<T>, aoc::Vec2<T>, int, int64_t>& t) const
+        {
+            size_t seed = 0;
+            aoc::hash_combine(seed, std::get<0>(t));
+            aoc::hash_combine(seed, std::get<1>(t));
+            aoc::hash_combine(seed, std::get<2>(t));
+            aoc::hash_combine(seed, std::get<3>(t));
+            return seed;
+        }
+    };
+
+    template<aoc::Number T>
+    struct hash<tuple<aoc::Vec2<T>, aoc::Vec2<T>, int>>
+    {
+        size_t operator()(const tuple<aoc::Vec2<T>, aoc::Vec2<T>, int>& t) const
+        {
+            size_t seed = 0;
+            aoc::hash_combine(seed, std::get<0>(t));
+            aoc::hash_combine(seed, std::get<1>(t));
+            aoc::hash_combine(seed, std::get<2>(t));
             return seed;
         }
     };
