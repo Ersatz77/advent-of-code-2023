@@ -95,6 +95,34 @@ namespace aoc
             return *this;
         }
 
+        Vec2<T>& operator+=(const T other)
+        {
+            x += other;
+            y += other;
+            return *this;
+        }
+
+        Vec2<T>& operator-=(const T other)
+        {
+            x -= other;
+            y -= other;
+            return *this;
+        }
+
+        Vec2<T>& operator*=(const T other)
+        {
+            x *= other;
+            y *= other;
+            return *this;
+        }
+
+        Vec2<T>& operator/=(const T other)
+        {
+            x /= other;
+            y /= other;
+            return *this;
+        }
+
         T x = 0;
         T y = 0;
 
@@ -121,6 +149,30 @@ namespace aoc
 
     template<Number T>
     Vec2<T> operator/(Vec2<T> lhs, const Vec2<T>& rhs)
+    {
+        return lhs /= rhs;
+    }
+
+    template<Number T>
+    Vec2<T> operator+(Vec2<T> lhs, const T rhs)
+    {
+        return lhs += rhs;
+    }
+
+    template<Number T>
+    Vec2<T> operator-(Vec2<T> lhs, const T rhs)
+    {
+        return lhs -= rhs;
+    }
+
+    template<Number T>
+    Vec2<T> operator*(Vec2<T> lhs, const T rhs)
+    {
+        return lhs *= rhs;
+    }
+
+    template<Number T>
+    Vec2<T> operator/(Vec2<T> lhs, const T rhs)
     {
         return lhs /= rhs;
     }
@@ -221,6 +273,38 @@ namespace aoc
             return *this;
         }
 
+        Vec3<T>& operator+=(const T other)
+        {
+            x += other;
+            y += other;
+            z += other;
+            return *this;
+        }
+
+        Vec3<T>& operator-=(const T other)
+        {
+            x -= other;
+            y -= other;
+            z -= other;
+            return *this;
+        }
+
+        Vec3<T>& operator*=(const T other)
+        {
+            x *= other;
+            y *= other;
+            z *= other;
+            return *this;
+        }
+
+        Vec3<T>& operator/=(const T other)
+        {
+            x /= other;
+            y /= other;
+            z /= other;
+            return *this;
+        }
+
         T x = 0;
         T y = 0;
         T z = 0;
@@ -251,6 +335,30 @@ namespace aoc
 
     template<Number T>
     Vec3<T> operator/(Vec3<T> lhs, const Vec3<T>& rhs)
+    {
+        return lhs /= rhs;
+    }
+
+    template<Number T>
+    Vec3<T> operator+(Vec3<T> lhs, const T rhs)
+    {
+        return lhs += rhs;
+    }
+
+    template<Number T>
+    Vec3<T> operator-(Vec3<T> lhs, const T rhs)
+    {
+        return lhs -= rhs;
+    }
+
+    template<Number T>
+    Vec3<T> operator*(Vec3<T> lhs, const T rhs)
+    {
+        return lhs *= rhs;
+    }
+
+    template<Number T>
+    Vec3<T> operator/(Vec3<T> lhs, const T rhs)
     {
         return lhs /= rhs;
     }
