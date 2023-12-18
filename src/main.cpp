@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
     // solutions.push_back(std::make_unique<aoc::Day15>());
     // solutions.push_back(std::make_unique<aoc::Day16>());
     // solutions.push_back(std::make_unique<aoc::Day17>());
-    // solutions.push_back(std::make_unique<aoc::Day18>());
+    solutions.push_back(std::make_unique<aoc::Day18>());
     solutions.push_back(std::make_unique<aoc::Day19>());
 
     try

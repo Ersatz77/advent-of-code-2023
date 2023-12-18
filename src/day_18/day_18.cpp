@@ -80,42 +80,29 @@ namespace aoc
         return instructions;
     }
 
-    static std::vector<LavaLagoonTile> dig_trench(const std::vector<LavaLagoonInstruction>& instructions)
+    static int64_t lava_lagoon_area(const std::vector<LavaLagoonInstruction>& instructions)
     {
-        std::vector<LavaLagoonTile> trench;
         LavaLagoonTile current = { 0, 0 };
+        int64_t area = 0;
+        int64_t border_tiles = 0;
         for (const auto& [direction, to_dig] : instructions)
         {
-            for (int64_t i = 0; i < to_dig; ++i)
-            {
-                current += direction;
-                trench.push_back(current);
-            }
-        }
-
-        return trench;
-    }
-
-    static int64_t lava_lagoon_area(const std::vector<LavaLagoonTile>& trench)
-    {
-        int64_t area = 0;
-        for (size_t i = 0; i < trench.size(); ++i)
-        {
-            LavaLagoonTile current = trench[i];
-            LavaLagoonTile next = trench[(i + 1) % trench.size()];
+            LavaLagoonTile next = current + (direction * to_dig);
+    
             area += (current.x * next.y) - (current.y * next.x);
+            border_tiles += to_dig;
+    
+            current = next;
         }
-
-        area = std::llabs(area) / 2;
-        return area + (trench.size() / 2) + 1;
+    
+        return (std::llabs(area) + border_tiles) / 2 + 1;
     }
 
     std::string Day18::part_1(const std::filesystem::path& input_root) const
     {
         std::vector<LavaLagoonInstruction> instructions = parse_input_part_1(input_root / "day_18.txt");
 
-        std::vector<LavaLagoonTile> trench = dig_trench(instructions);
-        int64_t area = lava_lagoon_area(trench);
+        int64_t area = lava_lagoon_area(instructions);
 
         return fmt::format("Day 18 Part 1 | Amount of lava the lagoon could hold: {}", area);
     }
@@ -124,8 +111,7 @@ namespace aoc
     {
         std::vector<LavaLagoonInstruction> instructions = parse_input_part_2(input_root / "day_18.txt");
 
-        std::vector<LavaLagoonTile> trench = dig_trench(instructions);
-        int64_t area = lava_lagoon_area(trench);
+        int64_t area = lava_lagoon_area(instructions);
 
         return fmt::format("Day 18 Part 2 | Amount of lava the lagoon could hold: {}", area);
     }
