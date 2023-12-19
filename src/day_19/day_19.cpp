@@ -155,8 +155,7 @@ namespace aoc
                 auto res = create_ranges(workflows, rule.destination, range);
                 ranges.insert(ranges.end(), res.begin(), res.end());
             }
-
-            if (rule.op == RuleOperation::LESS_THAN)
+            else if (rule.op == RuleOperation::LESS_THAN)
             {
                 PartRange adjusted_range = range;
                 adjusted_range[(rule.category_idx * 2) + 1] = rule.value - 1;
@@ -166,8 +165,7 @@ namespace aoc
 
                 range[rule.category_idx * 2] = rule.value;
             }
-
-            if (rule.op == RuleOperation::GREATER_THAN)
+            else if (rule.op == RuleOperation::GREATER_THAN)
             {
                 PartRange adjusted_range = range;
                 adjusted_range[rule.category_idx * 2] = rule.value + 1;
