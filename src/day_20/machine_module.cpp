@@ -1,8 +1,8 @@
 #include "day_20/machine_module.h"
 
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <string>
 
 namespace aoc
 {

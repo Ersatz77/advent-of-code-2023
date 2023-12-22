@@ -1,9 +1,9 @@
 #ifndef AOC_2023_DAY_20_MACHINE_MODULE_H
 #define AOC_2023_DAY_20_MACHINE_MODULE_H
 
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <string>
 
 namespace aoc
 {
