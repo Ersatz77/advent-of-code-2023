@@ -22,6 +22,7 @@
 #include "day_22/day_22.h"
 #include "day_23/day_23.h"
 #include "day_24/day_24.h"
+#include "day_25/day_25.h"
 #include "utility/day.h"
 
 #include "fmt/format.h"
@@ -48,30 +49,31 @@ int main(int argc, char* argv[])
     std::vector<std::unique_ptr<aoc::Day>> solutions;
     solutions.reserve(25);
 
-    // solutions.push_back(std::make_unique<aoc::Day1>());
-    // solutions.push_back(std::make_unique<aoc::Day2>());
-    // solutions.push_back(std::make_unique<aoc::Day3>());
-    // solutions.push_back(std::make_unique<aoc::Day4>());
-    // solutions.push_back(std::make_unique<aoc::Day5>());
-    // solutions.push_back(std::make_unique<aoc::Day6>());
-    // solutions.push_back(std::make_unique<aoc::Day7>());
-    // solutions.push_back(std::make_unique<aoc::Day8>());
-    // solutions.push_back(std::make_unique<aoc::Day9>());
-    // solutions.push_back(std::make_unique<aoc::Day10>());
-    // solutions.push_back(std::make_unique<aoc::Day11>());
-    // solutions.push_back(std::make_unique<aoc::Day12>());
-    // solutions.push_back(std::make_unique<aoc::Day13>());
-    // solutions.push_back(std::make_unique<aoc::Day14>());
-    // solutions.push_back(std::make_unique<aoc::Day15>());
-    // solutions.push_back(std::make_unique<aoc::Day16>());
-    // solutions.push_back(std::make_unique<aoc::Day17>());
-    // solutions.push_back(std::make_unique<aoc::Day18>());
-    // solutions.push_back(std::make_unique<aoc::Day19>());
-    // solutions.push_back(std::make_unique<aoc::Day20>());
-    // solutions.push_back(std::make_unique<aoc::Day21>());
-    // solutions.push_back(std::make_unique<aoc::Day22>());
-    // solutions.push_back(std::make_unique<aoc::Day23>());
+    solutions.push_back(std::make_unique<aoc::Day1>());
+    solutions.push_back(std::make_unique<aoc::Day2>());
+    solutions.push_back(std::make_unique<aoc::Day3>());
+    solutions.push_back(std::make_unique<aoc::Day4>());
+    solutions.push_back(std::make_unique<aoc::Day5>());
+    solutions.push_back(std::make_unique<aoc::Day6>());
+    solutions.push_back(std::make_unique<aoc::Day7>());
+    solutions.push_back(std::make_unique<aoc::Day8>());
+    solutions.push_back(std::make_unique<aoc::Day9>());
+    solutions.push_back(std::make_unique<aoc::Day10>());
+    solutions.push_back(std::make_unique<aoc::Day11>());
+    solutions.push_back(std::make_unique<aoc::Day12>());
+    solutions.push_back(std::make_unique<aoc::Day13>());
+    solutions.push_back(std::make_unique<aoc::Day14>());
+    solutions.push_back(std::make_unique<aoc::Day15>());
+    solutions.push_back(std::make_unique<aoc::Day16>());
+    solutions.push_back(std::make_unique<aoc::Day17>());
+    solutions.push_back(std::make_unique<aoc::Day18>());
+    solutions.push_back(std::make_unique<aoc::Day19>());
+    solutions.push_back(std::make_unique<aoc::Day20>());
+    solutions.push_back(std::make_unique<aoc::Day21>());
+    solutions.push_back(std::make_unique<aoc::Day22>());
+    solutions.push_back(std::make_unique<aoc::Day23>());
     solutions.push_back(std::make_unique<aoc::Day24>());
+    solutions.push_back(std::make_unique<aoc::Day25>());
 
     try
     {
